@@ -1,0 +1,38 @@
+{
+  "name": "@composable-model-graph/core",
+  "version": "0.1.0",
+  "description": "Generic primitives for building inspectable transformation graphs.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/operatorstack/modelgraph.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/operatorstack/modelgraph#readme",
+  "keywords": [
+    "model-graph",
+    "transform",
+    "pipeline",
+    "evaluation",
+    "feedback",
+    "trace",
+    "typescript"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean"
+  }
+}
