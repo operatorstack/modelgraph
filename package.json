@@ -1,5 +1,5 @@
 {
-  "name": "composable-model-graph",
+  "name": "modelgraph",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -14,8 +14,18 @@
   "engines": {
     "node": ">=18"
   },
+  "main": "./packages/core/dist/index.js",
+  "module": "./packages/core/dist/index.js",
+  "types": "./packages/core/dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./packages/core/dist/index.d.ts",
+      "import": "./packages/core/dist/index.js"
+    }
+  },
   "scripts": {
     "build": "tsc -b",
+    "prepare": "tsc -b packages/core",
     "clean": "tsc -b --clean && rimraf packages/*/dist examples/*/dist",
     "test": "vitest run",
     "test:watch": "vitest",
