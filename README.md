@@ -212,7 +212,7 @@ Loss / Error
 This is only one illustrative instance of the generic graph. The library does
 not ship numeric layers; you implement transforms like these in a consumer.
 
-### 7. Branching Model (future / advanced)
+### 7. Branching Model
 
 ```
 Input
@@ -221,7 +221,30 @@ Input
   └──▶ Transform C ──┘
 ```
 
-Core v1 runs linear graphs only; branching is documented as a future shape.
+Pass `connections` to `createModelGraph` to run transforms as a branch/merge
+graph instead of a straight line. A transform runs once every transform feeding
+it has produced output; transforms whose inputs are all ready run together. A
+transform fed by several others (a merge) receives the list of their outputs,
+in connection order.
+
+```ts
+const graph = createModelGraph({
+  id: "branch-merge",
+  name: "Branch then merge",
+  transforms: [start, draftB, draftC, merge],
+  connections: [
+    { from: "start", to: "draftB" },
+    { from: "start", to: "draftC" },
+    { from: "draftB", to: "merge" },
+    { from: "draftC", to: "merge" },
+  ],
+});
+```
+
+The graph input goes to the single transform with no incoming connection, and
+the graph output is the single transform with no outgoing connection (set
+`start` / `end` explicitly when there is more than one). Cycles are not allowed:
+repeating a run belongs to the layer above the graph.
 
 ### 8. Comparison Model
 

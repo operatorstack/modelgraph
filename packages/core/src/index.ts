@@ -45,6 +45,7 @@ export {
 export {
   type ModelGraph,
   type ModelGraphConfig,
+  type Connection,
   type RunOptions,
   type AnyTransform,
   createModelGraph,
